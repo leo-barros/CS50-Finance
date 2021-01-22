@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>Transacted</th>
+            </tr>
+        </thead>
+        <tbody>
+                {% for i in query %}
+                <tr>
+                    <td>{{ i["symbol"].upper() }}</td>
+                    <td>{{ i["quantity"] }}</td>
+                    <td>{{"$" '%0.2f'| format(i["price"]) }}</td>
+                    <td>{{i["date"]}} {{i["time"]}}</td>
+                </tr>
+                {%endfor%}
+
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Shares</th>
+                <th>Price</th>
+                <th>TOTAL</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="4"></td>
+                <td>{{"$"'%0.2f'| format(gtotal)}}</td>
+            </tr>
+        </tfoot>
+        <tbody>
+
+                {% for i in query %}
+                {% if i["quantity"] > 0 %}
+                <tr>
+                    <td>{{ i["symbol"].upper() }}</td>
+                    <td>{{ i["name"] }}</td>
+                    <td>{{ i["quantity"] }}</td>
+                    <td>{{"$" '%0.2f'| format(current_price[i["symbol"]]) }}</td>
+                    <td>{{"$" '%0.2f'| format(total[i["symbol"]]) }}</td>
+                </tr>
+                {% endif %}
+                {%endfor%}
+
+                <tr>
+                    <td>CASH</td>
+                    <td colspan="3"></td>
+                    <td>{{"$"'%0.2f'| format(cash) }}</td>
+                </tr>
+
+        </tbody>
+    </table>
+
+{% endblock %}
