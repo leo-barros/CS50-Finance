@@ -21,27 +21,31 @@ def apology(message, code=400):
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
 
+# def login_required(f):
+
+#     @wraps(f)
+#     def decorated_function(*args, **kwargs):
+#         if session.get("user_id") is None:
+#             return redirect("/login")
+#         return f(*args, **kwargs)
+#     return decorated_function
+
 def login_required(f):
-    """
-    Decorate routes to require login.
-
-    http://flask.pocoo.org/docs/1.0/patterns/viewdecorators/
-    """
     @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if session.get("user_id") is None:
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
             return redirect("/login")
-        return f(*args, **kwargs)
-    return decorated_function
 
-
+    return wrap
 def lookup(symbol):
     """Look up quote for symbol."""
 
     # Contact API
     try:
-        api_key = os.environ.get("API_KEY")
-        response = requests.get(f"https://cloud.iexapis.com/stable/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
+        api_key = "pk_f2a11cdf0b364ed99ce7412f242d3ed1"
+        response = requests.get(f"https://cloud.iexapis.com/v1/stock/{urllib.parse.quote_plus(symbol)}/quote?token={api_key}")
         response.raise_for_status()
     except requests.RequestException:
         return None
