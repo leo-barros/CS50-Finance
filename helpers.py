@@ -33,7 +33,7 @@ def apology(message, code=400):
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
-        if 'logged_in' in session:
+        if session.get("user_id") is None:
             return f(*args, **kwargs)
         else:
             return redirect("/login")
