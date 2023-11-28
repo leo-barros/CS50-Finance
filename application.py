@@ -34,7 +34,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use POSTGRES database
-db = SQL(os.getenv("DATABASE_URI"))
+db = SQL(os.getenv("DATABASE_UR"))
 
 # Make sure API key is set
 # if not os.environ.get("API_KEY"):
