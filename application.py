@@ -47,6 +47,7 @@ def index():
     current_price={}
     response={}
     total={}
+    session["user_id"]=0
     query= db.execute("SELECT userid,symbol,name,quantity FROM holdings WHERE userid=:userid ",userid=session["user_id"])
     cashq= db.execute("SELECT cash FROM users WHERE id=:userid",userid=session["user_id"])
     gtotal=cashq[0]["cash"]
