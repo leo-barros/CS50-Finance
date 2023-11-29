@@ -21,24 +21,24 @@ def apology(message, code=400):
     return render_template("apology.html", top=code, bottom=escape(message)), code
 
 
-# def login_required(f):
-
-#     @wraps(f)
-#     def decorated_function(*args, **kwargs):
-#         if session.get("user_id") is None:
-#             return redirect("/login")
-#         return f(*args, **kwargs)
-#     return decorated_function
-
 def login_required(f):
     @wraps(f)
-    def wrap(*args, **kwargs):
+    def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
-            return f(*args, **kwargs)
-        else:
             return redirect("/login")
+        return f(*args, **kwargs)
+    return decorated_function
 
-    return wrap
+# def login_required(f):
+#     @wraps(f)
+#     def wrap(*args, **kwargs):
+#         if session.get("user_id") is None:
+#             return redirect("/login")
+#         else:
+#             return f(*args, **kwargs)
+            
+
+#     return wrap
 def lookup(symbol):
     """Look up quote for symbol."""
 

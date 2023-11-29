@@ -110,6 +110,7 @@ def login():
     """Log user in"""
 
     # Forget any user_id
+    session.pop("user_id", None)
 
 
     # User reached route via POST (as by submitting a form via POST)
