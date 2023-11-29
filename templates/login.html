@@ -7,11 +7,13 @@
 {% block main %}
     <form action="/login" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text">
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text" required>
         </div>
         <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password">
+            <input class="form-control" name="password" placeholder="Password" type="password" required>
         </div>
         <button class="btn btn-primary" type="submit">Log In</button>
+        Not registered?
+        <a class="btn btn-primary" href="/register">Register</a>
     </form>
 {% endblock %}
